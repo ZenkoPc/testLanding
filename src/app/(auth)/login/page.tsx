@@ -37,7 +37,7 @@ const Page: FC<PageProps> = ({}) => {
     console.log(values);
   }
   return (
-    <main className="w-full h-svh flex items-center justify-center">
+    <main className="w-full h-svh flex items-center justify-center text-white">
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
       <div className="rounded-2xl bg-neutral-950 border !border-white/20 py-4 px-6 pb-5 w-full max-w-[400px] flex flex-col gap-3 items-center justify-center">
