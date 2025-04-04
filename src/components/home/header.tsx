@@ -18,7 +18,7 @@ export function HomeHeader(){
     
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
-      }, [])
+    }, [])
 
     return(
         <header
@@ -34,26 +34,22 @@ export function HomeHeader(){
                     <span className="hidden text-xl font-bold text-white sm:inline-block">ServiciosPro</span>
                 </div>
                 <nav className="hidden md:flex items-center gap-8">
-                    <Link href="/" className="text-sm font-medium text-white border-b-2 border-[#ff00ff] pb-1">
-                    Home
+                    <Link href="/" className="text-sm font-medium text-white border-b-2 border-red-400 pb-1">
+                        Inicio
                     </Link>
                     <div className="relative group">
                     <Link
-                        href="/servicios"
+                        href="#servicios"
                         className="flex items-center gap-1 text-sm font-medium text-white/80 hover:text-white"
                     >
                         Servicios
-                        <ChevronRight className="h-4 w-4 rotate-90 opacity-70" />
                     </Link>
                     </div>
-                    <Link href="/portfolio" className="text-sm font-medium text-white/80 hover:text-white">
-                    Portfolio
+                    <Link href="/dashboard" className="text-sm font-medium text-white/80 hover:text-white">
+                        Dashboard
                     </Link>
-                    <Link href="/nosotros" className="text-sm font-medium text-white/80 hover:text-white">
-                    Sobre nosotros
-                    </Link>
-                    <Link href="/trabajo" className="text-sm font-medium text-white/80 hover:text-white">
-                    Trabaja con nosotros
+                    <Link href="/contacto" className="text-sm font-medium text-white/80 hover:text-white">
+                        Contactanos
                     </Link>
                 </nav>
                 <div>
