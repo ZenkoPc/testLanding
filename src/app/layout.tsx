@@ -20,7 +20,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      <body style={{ fontFamily: "'Space Grotesk', sans-serif" }} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
