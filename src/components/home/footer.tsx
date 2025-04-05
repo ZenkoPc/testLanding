@@ -16,12 +16,12 @@ export function HomeFooter(){
                     </div>
                     <p className="text-white/70">Soluciones de gestión para empresas de todos los tamaños.</p>
                 </div>
-                <div className="flex flex-1 justify-center items-start gap-10">
+                <div className="flex flex-1 justify-center items-start gap-10 flex-col md:flex-row">
                     <div>
                         <h3 className="mb-4 text-lg font-medium">Empresa</h3>
                         <ul className="space-y-2">
                             <li>
-                                <Link href="#" className="text-white/70 hover:text-white">
+                                <Link href="/contact" className="text-white/70 hover:text-white">
                                     Contactanos
                                 </Link>
                             </li>

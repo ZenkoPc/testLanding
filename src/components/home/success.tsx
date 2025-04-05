@@ -28,7 +28,7 @@ export function SuccessCasesSection() {
           {SUCCESS_CASES.map((succ_case, index) => (
             <Card
               key={index}
-              className="bg-[#0a0a0a] backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:border-[#ff00ff]/30 transition-all duration-300"
+              className="bg-[#0a0a0a] hover:scale-105 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:border-[#ff00ff]/30 transition-all duration-300"
             >
               <h3 className="text-xl font-bold text-white mb-2">
                 {succ_case.title}
@@ -41,12 +41,6 @@ export function SuccessCasesSection() {
                   </p>
                   <p className="text-sm text-white/70">{succ_case.statLabel}</p>
                 </div>
-                <Button
-                  variant="ghost"
-                  className="text-white hover:text-[#ff00ff] p-0"
-                >
-                  Ver caso <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
               </div>
               <BorderBeam
               key={index+"bx"}
