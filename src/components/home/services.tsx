@@ -6,7 +6,7 @@ import { BorderBeam } from "../magicui/border-beam";
 
 export function ServicesSection() {
   return (
-    <section id="servicios" className="relative w-full py-20 overflow-hidden border-t border-white/5">
+    <section id="services" className="relative w-full py-20 overflow-hidden border-t border-white/5">
       <div className="absolute inset-0 bg-radial from-[#00ffff1a] to-[#050505] opacity-60"></div>
       <div className="container px-4 md:px-6 relative z-10">
         <div className="text-center mb-12">
@@ -28,7 +28,7 @@ export function ServicesSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          <Card className="bg-[#0a0a0a] backdrop-blur-sm border border-white/10 rounded-lg p-8 hover:border-[#ff00ff]/30 transition-all duration-300 flex flex-col h-full">
+          <Card className="hover:scale-105 bg-[#0a0a0a] backdrop-blur-sm border border-white/10 rounded-lg p-8 shadow-sm shadow-[#ff00ff] transition-all hover:shadow-md duration-300 flex flex-col h-full">
             <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
               <Users className="mr-3 h-6 w-6 text-[#ff00ff]" />
               Gestión de Usuarios
@@ -38,10 +38,6 @@ export function ServicesSection() {
               fácilmente quién tiene acceso a qué información, con controles
               granulares y reportes detallados.
             </p>
-            <Button className="rounded-full bg-[#5d3fd3] hover:bg-[#4f35b3] text-white w-fit">
-              Ver más
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
             <BorderBeam
               duration={10}
               size={400}
@@ -49,7 +45,7 @@ export function ServicesSection() {
             />
           </Card>
 
-          <Card className="bg-[#0a0a0a] backdrop-blur-sm border border-white/10 rounded-lg p-8 hover:border-[#00ffff]/30 transition-all duration-300 flex flex-col h-full">
+          <Card className="hover:scale-105 bg-[#0a0a0a] backdrop-blur-sm border border-white/10 rounded-lg p-8 shadow-sm shadow-[#ff00ff] transition-all hover:shadow-md duration-300 flex flex-col h-full">
             <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
               <BarChart3 className="mr-3 h-6 w-6 text-[#00ffff]" />
               Servicios Digitales
@@ -59,10 +55,6 @@ export function ServicesSection() {
               etapas. Desde la concepción hasta el lanzamiento, con herramientas
               potentes para visualizar información.
             </p>
-            <Button className="rounded-full bg-[#5d3fd3] hover:bg-[#4f35b3] text-white w-fit">
-              Ver más
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
             <BorderBeam
               duration={10}
               size={400}
@@ -75,7 +67,7 @@ export function ServicesSection() {
           {SERVICES.map((service, i) => (
             <Card
               key={i}
-              className="border border-white/10 shadow-lg transition-all hover:shadow-xl bg-[#0a0a0a] backdrop-blur-sm group hover:border-[#ff00ff]/50"
+              className="hover:scale-105 border border-white/10 shadow-sm shadow-[#00ffff] transition-all hover:shadow-md bg-[#0a0a0a] backdrop-blur-sm group"
             >
               <CardContent className="p-6">
                 <div className={`mb-4 ${service.color} p-3 rounded-full w-fit`}>
@@ -87,16 +79,10 @@ export function ServicesSection() {
                   {service.title}
                 </h3>
                 <p className="text-white/70">{service.description}</p>
-                <Button
-                  variant="ghost"
-                  className={`mt-4 p-0 text-transparent bg-clip-text inline-block ${service.color} font-bold group-hover:underline`}
-                >
-                  Saber más <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
               </CardContent>
               <BorderBeam
                 duration={10}
-                size={400}
+                size={500}
                 className="from-transparent via-blue-500 to-transparent"
               />
             </Card>

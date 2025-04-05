@@ -1,16 +1,20 @@
-import { TESTIMONIALS } from "@/constants";
-import { useEffect, useRef } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
-import { Card, CardContent } from "../ui/card";
-import Autoplay from "embla-carousel-autoplay";
+import { useEffect, useRef, useState } from "react";
+import { Carousel, CarouselContent } from "../ui/carousel";
 import AutoScroll from "embla-carousel-auto-scroll"
+import { retrieveTestimonials } from "@/lib/functions";
+import { TESTIMONIALS } from "@/constants";
 
 export function TestimonialsSection() {
   const testimonialsRef = useRef<HTMLDivElement>(null);
-  const testimonialsData = [
-    ...TESTIMONIALS,
-    ...TESTIMONIALS
-  ]
+  const [testimonials, setTestimonials] = useState<typeof TESTIMONIALS>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true)
+    retrieveTestimonials()
+        .then((data) => setTestimonials(data))
+        .finally(() => setLoading(false))
+  }, [])
 
   useEffect(() => {
     if (!testimonialsRef.current) return;
@@ -66,37 +70,47 @@ export function TestimonialsSection() {
             className="w-full"
             >
             <CarouselContent className="w-full mx-0">
-                {testimonialsData.map((testimonial, index) => (
+                {loading && (
+                    <div className="container">
+                        <div className="flex items-center justify-center h-32">
+                            <div className="animate-spin rounded-full size-18 border-b-2 border-[#ff00ff] text-red-500"></div>
+                        </div>
+                        <p className="text-white text-center">
+                            Cargando testimonios...
+                        </p>
+                    </div>
+                )}
+                {!loading && testimonials.map((testimonial, index) => (
                 <>
-                    <div key={index+'a'} className="px-5"></div>
+                    <div key={index+'ax'} className="px-5"></div>
                     <div
-                        key={index}
+                        key={index+'bx'}
                         className="flex-shrink-0 w-80 rounded-xl border border-white/10 bg-[#0a0a0a] backdrop-blur-sm p-6 text-white hover:border-[#ff00ff]/50 transition-colors duration-300"
                     >
                         <div className="mb-4 text-yellow-400 flex">
-                        {"\u2605\u2605\u2605\u2605\u2605"}
+                            {"\u2605\u2605\u2605\u2605\u2605"}
                         </div>
                         <p className="mb-6 italic text-white/90 h-32 overflow-hidden">
-                        "{testimonial.text}"
+                            "{testimonial.text}"
                         </p>
                         <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-full border border-[#ff00ff] p-0.5 overflow-hidden">
-                            <img
-                            src={`/placeholder.svg?height=40&width=40&text=U${
-                                (index % 6) + 1
-                            }`}
-                            alt="Avatar"
-                            className="h-full w-full rounded-full"
-                            width={40}
-                            height={40}
-                            />
-                        </div>
-                        <div>
-                            <p className="font-medium">{testimonial.name}</p>
-                            <p className="text-sm text-white/70">
-                            {testimonial.company}
-                            </p>
-                        </div>
+                            <div className="h-12 w-12 rounded-full border border-[#ff00ff] p-0.5 overflow-hidden">
+                                <img
+                                    src={testimonial.image}
+                                    alt="Avatar"
+                                    className="h-full w-full rounded-full"
+                                    width={40}
+                                    height={40}
+                                />
+                            </div>
+                            <div>
+                                <p className="font-medium">
+                                    {testimonial.name}
+                                </p>
+                                <p className="text-sm text-white/70">
+                                    {testimonial.company}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </>

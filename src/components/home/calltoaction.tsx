@@ -1,5 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
+import Link from "next/link";
+import { PAGES_LINKS } from "@/constants";
 
 export function CallToActionSection(){
     return(
@@ -16,14 +18,18 @@ export function CallToActionSection(){
                 </p>
               </div>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <Button className="rounded-full border border-[#ff00ff] bg-transparent text-white hover:bg-[#ff00ff]/10 transition-colors duration-300 px-5 py-2 h-9">
-                  Crear cuenta
-                  <ChevronRight className="ml-1 h-4 w-4" />
-                </Button>
-                <Button className="rounded-full border border-[#00ffff] bg-transparent text-white hover:bg-[#00ffff]/10 transition-colors duration-300 px-5 py-2 h-9">
-                  Contactar con ventas
-                  <ChevronRight className="ml-1 h-4 w-4" />
-                </Button>
+                <Link href={PAGES_LINKS[1].url}>
+                    <Button className="rounded-full hover:scale-105 cursor-pointer border border-[#ff00ff] bg-transparent text-white hover:bg-[#ff00ff]/10 transition-all duration-300 px-5 py-2 h-9">
+                        {PAGES_LINKS[1].slug}
+                        <ChevronRight className="ml-1 h-4 w-4" />
+                    </Button>
+                </Link>
+                <Link href={"/contact"}>
+                    <Button className="rounded-full hover:scale-105 cursor-pointer border border-[#00ffff] bg-transparent text-white hover:bg-[#00ffff]/10 transition-all duration-300 px-5 py-2 h-9">
+                        Contactar con ventas
+                        <ChevronRight className="ml-1 h-4 w-4" />
+                    </Button>
+                </Link>
               </div>
             </div>
           </div>

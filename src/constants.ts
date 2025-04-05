@@ -1,4 +1,5 @@
-import { BarChart3, Code, Users } from "lucide-react"
+import { BarChart3, Code, HomeIcon, MonitorCogIcon, PhoneCallIcon, SquareKanbanIcon, Users } from "lucide-react"
+import { Testimonial } from "./types"
 
 export const SUCCESS_CASES = [
     {
@@ -17,7 +18,7 @@ export const SUCCESS_CASES = [
     },
     {
         title: "Agencia Gubernamental",
-        description: "Sistema de administración de servicios públicos con trazabilidad y reportes avanzados.",
+        description: "Sistema de administración de servicios con trazabilidad y reportes avanzados.",
         stat: "99.9%",
         statLabel: "Disponibilidad",
     }
@@ -44,35 +45,69 @@ export const SERVICES = [
     }
 ]
 
-export const TESTIMONIALS = [
+export const TESTIMONIALS: Testimonial[] = [
     {
       text: "Esta plataforma ha transformado la manera en que gestionamos nuestros servicios. La interfaz es intuitiva y los roles de usuario nos permiten controlar perfectamente quién accede a qué información.",
       name: "Cliente Satisfecho 1",
-      company: "Empresa 1",
+      company: "Google",
     },
     {
       text: "Increíble herramienta para la gestión de servicios. Nos ha permitido optimizar nuestros procesos y mejorar la comunicación entre equipos.",
       name: "Cliente Satisfecho 2",
-      company: "Empresa 2",
+      company: "Apple",
     },
     {
       text: "La mejor inversión que hemos hecho este año. El sistema de roles es exactamente lo que necesitábamos para nuestro equipo distribuido.",
       name: "Cliente Satisfecho 3",
-      company: "Empresa 3",
+      company: "John deer",
     },
     {
       text: "Excelente plataforma, fácil de usar y con todas las funcionalidades que necesitamos. El soporte técnico es excepcional.",
       name: "Cliente Satisfecho 4",
-      company: "Empresa 4",
+      company: "Samsung",
     },
     {
       text: "Hemos aumentado nuestra productividad en un 30% desde que empezamos a usar esta plataforma. Totalmente recomendada.",
       name: "Cliente Satisfecho 5",
-      company: "Empresa 5",
+      company: "Transmilenio",
     },
     {
       text: "La gestión de información nunca había sido tan sencilla. Gracias a esta plataforma, podemos centrarnos en lo que realmente importa.",
       name: "Cliente Satisfecho 6",
-      company: "Empresa 6",
+      company: "Speed logic",
     },
   ]
+
+export const HOME_LINKS = [
+  {
+    url: '/',
+    slug: "Inicio",
+    icon: HomeIcon
+  },
+  {
+    url: '/#services',
+    slug: "Servicios",
+    icon: MonitorCogIcon
+  },
+  {
+    url: '/dashboard',
+    slug: "Dashboard",
+    icon: SquareKanbanIcon
+  },
+  {
+    url: '/contact',
+    slug: "Contactanos",
+    icon: PhoneCallIcon
+  }
+]
+
+export const PAGES_LINKS = [
+  {
+    url: '/login',
+    slug: "Acceder"
+  },
+  {
+    url: '/register',
+    slug: "Crear cuenta"
+  },
+]
