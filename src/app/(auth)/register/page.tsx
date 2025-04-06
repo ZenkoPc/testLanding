@@ -1,5 +1,6 @@
 "use client";
 
+import { RegisterCredentials } from "@/actions/register";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -10,25 +11,24 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { registerSchema } from "@/schemas/register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronLeft } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { FC } from "react";
+import { useRouter } from "next/navigation";
+import { FC, useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 interface PageProps {}
 
-const formSchema = z.object({
-  firstName: z.string().min(1, "Por favor, introduce tu nombre"),
-  lastName: z.string().min(1, "Por favor, introduce tu apellido"),
-  email: z.string().email("Por favor, introduce un correo electrónico válido"),
-  password: z.string().min(1, "Por favor, introduce una contraseña"),
-});
-
 const Page: FC<PageProps> = ({}) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isPending, startTransition] = useTransition()
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -36,12 +36,40 @@ const Page: FC<PageProps> = ({}) => {
       password: "",
     },
   });
+  const router = useRouter()
+  const session = useSession()
+  
+  useEffect(() => {
+    if(session.status !== "authenticated") return
+  
+    if(session.data.user.role === "ADMIN"){
+      router.push("/admin/dashboard")
+    }else{
+      router.push("/dashboard")
+    }
+  
+  }, [session])
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(values: z.infer<typeof registerSchema>) {
+    startTransition(() => {
+      RegisterCredentials(values)
+        .then((res) => {
+          if (res?.error) {
+            toast(res.error as string)
+          } else {
+            toast(res?.success);
+            router.push(res.data)
+          }
+        })
+    })
   }
   return (
     <main className="w-full h-svh flex items-center justify-center text-white">
+      {isPending && (
+        <div className="w-full absolute h-full flex flex-1 justify-center items-center bg-black/50 z-20">
+          <div className="animate-spin rounded-full size-18 border-b-2 border-[#881414]"></div>
+        </div>
+      )}
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
       <div className="rounded-2xl bg-neutral-950 border !border-white/20 py-4 px-6 pb-5 w-full max-w-[400px] flex flex-col gap-3 items-center justify-center">
@@ -88,7 +116,7 @@ const Page: FC<PageProps> = ({}) => {
                 name="lastName"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Apellido</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Pérez"

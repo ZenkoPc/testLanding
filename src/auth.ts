@@ -34,6 +34,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 session.user.role = token.role
             }
 
+            if(token.name && session.user){
+                session.user.name = token.name
+            }
+
             return session
         },
         async jwt({ token }){
@@ -44,6 +48,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             if(!existingUser) return token
 
             token.role = existingUser.role
+            token.name = existingUser.firstName + " " + existingUser.lastName
 
             return token
         }

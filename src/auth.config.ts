@@ -9,11 +9,10 @@ export default {
         Credentials({
             async authorize(credentials) {
                 const validatedFields = loginSchema.safeParse(credentials)
-
+                
                 if(validatedFields.success){
                     const { email, password } = validatedFields.data
 
-                    //get db validation
                     const user = await getUserByEmail(email)
 
                     if(!user || !user.password) return null
@@ -22,7 +21,7 @@ export default {
                         password,
                         user.password
                     )
-
+                    
                     if(passwordsMatch) return user
                 }
 

@@ -50,6 +50,34 @@ export async function LoginCredentials(values: z.infer<typeof loginSchema>){
     
             throw err;
         }
+    }else{
+        try{
+            const res = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+                redirectTo: "/dashboard"
+            })
+            return {
+                success: "Sesion iniciada correctamente",
+                data: res
+            }
+        }catch(err){
+            if(err instanceof AuthError){
+                switch(err.type){
+                    case "CredentialsSignin":
+                        return {
+                            error: "Datos invalidos, verifica tu correo y contraseña"
+                        }
+                    default:
+                       return {
+                        error: "Algo ha salido mal, intenta mas tarde."
+                       } 
+                }
+            }
+    
+            throw err;
+        }
     }
 
 }

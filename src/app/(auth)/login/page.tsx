@@ -11,33 +11,43 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { loginSchema } from "@/schemas/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronLeft } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { FC, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { FC, useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 interface PageProps {}
 
-const formSchema = z.object({
-  email: z.string().email("Por favor, introduce un correo electrónico válido"),
-  password: z.string().min(1, "Por favor, introduce una contraseña"),
-});
-
 const Page: FC<PageProps> = ({}) => {
   const [isPending, startTransition] = useTransition()
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
+  const router = useRouter()
+  const session = useSession()
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  useEffect(() => {
+    if(session.status !== "authenticated") return
+
+    if(session.data.user.role === "ADMIN"){
+      router.push("/admin/dashboard")
+    }else{
+      router.push("/dashboard")
+    }
+
+  }, [session])
+
+  function onSubmit(values: z.infer<typeof loginSchema>) {
     startTransition(() => {
       LoginCredentials(values)
         .then((res) => {
@@ -45,6 +55,7 @@ const Page: FC<PageProps> = ({}) => {
             toast(res.error as string)
           } else {
             toast(res?.success);
+            router.push(res.data)
           }
         })
     })
