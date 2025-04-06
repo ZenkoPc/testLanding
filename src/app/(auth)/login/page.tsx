@@ -1,5 +1,6 @@
 "use client";
 
+import { LoginCredentials } from "@/actions/login";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -13,8 +14,9 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 interface PageProps {}
@@ -25,6 +27,7 @@ const formSchema = z.object({
 });
 
 const Page: FC<PageProps> = ({}) => {
+  const [isPending, startTransition] = useTransition()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,9 +38,24 @@ const Page: FC<PageProps> = ({}) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    startTransition(() => {
+      LoginCredentials(values)
+        .then((res) => {
+          if (res?.error) {
+            toast(res.error as string)
+          } else {
+            toast(res?.success);
+          }
+        })
+    })
   }
   return (
     <main className="w-full h-svh flex items-center justify-center text-white">
+      {isPending && (
+        <div className="w-full absolute h-full flex flex-1 justify-center items-center bg-black/50 z-20">
+          <div className="animate-spin rounded-full size-18 border-b-2 border-[#881414]"></div>
+        </div>
+      )}
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
 
       <div className="rounded-2xl bg-neutral-950 border !border-white/20 py-4 px-6 pb-5 w-full max-w-[400px] flex flex-col gap-3 items-center justify-center">

@@ -13,19 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body
-        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-        suppressHydrationWarning
-      >
-        {children}
-      </body>
-    </html>
+    <>
+      {children}
+    </>
   );
 }
