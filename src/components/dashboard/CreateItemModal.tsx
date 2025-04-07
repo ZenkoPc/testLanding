@@ -3,22 +3,22 @@
 import { Dialog, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { FC } from "react";
 import {
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { PlusCircle } from "lucide-react";
@@ -54,7 +54,7 @@ const CreateItemModal: FC<CreateItemModalProps> = ({}) => {
       <DialogTrigger asChild>
         <Button className="rounded-xl hover:bg-violet-500/75 bg-violet-500 cursor-pointer">
           <PlusCircle />
-          Nuevo producto
+          Nuevo <span className="hidden sm:inline-block">producto</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-black text-white border-white/20">
