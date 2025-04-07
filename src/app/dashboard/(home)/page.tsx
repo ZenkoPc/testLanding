@@ -1,12 +1,11 @@
 import CreateItemModal from "@/components/dashboard/CreateItemModal";
-import { Button } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { EllipsisVertical, LogOut } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import { FC } from "react";
 
 interface PageProps {}
@@ -59,16 +58,10 @@ const Page: FC<PageProps> = ({}) => {
 
   return (
     <main className="text-white bg-[#050505] w-full min-h-svh flex justify-center">
-      <div className="w-full max-w-6xl p-4 flex flex-col gap-6 py-14">
+      <div className="w-full max-w-6xl px-5 md:px-10 flex flex-col gap-6 py-16">
         <div className="flex items-center justify-between">
           <h1 className="text-4xl font-bold">Productos</h1>
-          <div className="flex gap-3">
-            {isAdmin && <CreateItemModal />}
-            <Button className="rounded-xl hover:bg-gray-700 bg-gray-600 cursor-pointer">
-              <LogOut />
-              Salir
-            </Button>
-          </div>
+          {isAdmin && <CreateItemModal />}
         </div>
 
         {/* Grid de productos */}
