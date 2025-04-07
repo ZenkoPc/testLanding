@@ -8,9 +8,6 @@ export function HomeSidebar(){
         <Sidebar collapsible="offcanvas" className="">
             <SidebarHeader className="bg-[#0f0f0f] p-4 flex gap-2 flex-row items-center">
                 <Logo />
-                <span className="text-xl md:hidden font-bold text-white">
-                    ServiciosPro
-                </span>
             </SidebarHeader>
             <SidebarContent className="bg-[#0f0f0f]">
                 {HOME_LINKS.map((link, index) => (
