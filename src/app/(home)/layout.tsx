@@ -26,7 +26,7 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
-        <div className="flex min-h-screen overflow-x-hidden flex-col bg-[#050505]">
+        <div className="flex w-full min-h-screen h-auto overflow-x-hidden flex-col bg-[#050505]">
           <HomeHeader />
           {children}
           <HomeFooter />
