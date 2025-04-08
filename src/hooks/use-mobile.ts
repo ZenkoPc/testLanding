@@ -2,6 +2,10 @@ import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768
 
+/**
+Hook personalizado que detecta si el dispositivo actual está en vista móvil
+comparando el ancho de la ventana con un breakpoint definido.
+*/
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 

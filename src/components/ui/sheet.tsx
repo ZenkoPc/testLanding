@@ -6,9 +6,22 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+Componente raíz del `Sheet`, una interfaz deslizante que se muestra desde los bordes de la pantalla.
+Utiliza `Radix Dialog` como base.
+
+@param props - Propiedades del componente `SheetPrimitive.Root`.
+*/
+
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
+
+/**
+Botón o elemento que activa la apertura del `Sheet`.
+
+@param props - Propiedades del componente `SheetPrimitive.Trigger`.
+*/
 
 function SheetTrigger({
   ...props
@@ -16,17 +29,36 @@ function SheetTrigger({
   return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
 }
 
+/**
+Botón o elemento que cierra el `Sheet`.
+
+@param props - Propiedades del componente `SheetPrimitive.Close`.
+*/
+
 function SheetClose({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Close>) {
   return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
 }
 
+/**
+Portal para renderizar el `Sheet` fuera del flujo normal del DOM.
+
+@param props - Propiedades del componente `SheetPrimitive.Portal`.
+*/
+
 function SheetPortal({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Portal>) {
   return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
 }
+
+/**
+Capa semitransparente detrás del `Sheet` que oscurece el fondo.
+
+@param className - Clases CSS personalizadas.
+@param props - Propiedades adicionales del componente `SheetPrimitive.Overlay`.
+*/
 
 function SheetOverlay({
   className,
@@ -43,6 +75,16 @@ function SheetOverlay({
     />
   )
 }
+
+/**
+Contenedor principal del contenido del `Sheet`.
+Permite personalizar desde qué borde aparece con la prop `side`.
+
+@param className - Clases CSS personalizadas.
+@param children - Elementos hijos dentro del sheet.
+@param side - Lado desde donde se muestra: `"top"`, `"right"`, `"bottom"` o `"left"` (por defecto `"right"`).
+@param props - Propiedades adicionales del componente `SheetPrimitive.Content`.
+*/
 
 function SheetContent({
   className,
@@ -81,6 +123,13 @@ function SheetContent({
   )
 }
 
+/**
+Encabezado del `Sheet`, comúnmente contiene el título y descripción.
+
+@param className - Clases CSS personalizadas.
+@param props - Otras propiedades de un `div`.
+*/
+
 function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -91,6 +140,13 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+Pie de página del `Sheet`, se posiciona al final del contenido.
+
+@param className - Clases CSS personalizadas.
+@param props - Otras propiedades de un `div`.
+*/
+
 function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -100,6 +156,13 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
     />
   )
 }
+
+/**
+Título principal del `Sheet`, se muestra generalmente en el encabezado.
+
+@param className - Clases CSS personalizadas.
+@param props - Propiedades del componente `SheetPrimitive.Title`.
+*/
 
 function SheetTitle({
   className,
@@ -113,6 +176,13 @@ function SheetTitle({
     />
   )
 }
+
+/**
+Descripción secundaria que acompaña al título del `Sheet`.
+
+@param className - Clases CSS personalizadas.
+@param props - Propiedades del componente `SheetPrimitive.Description`.
+*/
 
 function SheetDescription({
   className,

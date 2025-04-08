@@ -3,6 +3,23 @@
 import { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 
+/**
+Componente `ContactPageHero` – Sección de presentación animada para la página de contacto.
+
+Renderiza una animación con esferas flotantes tipo "neón" usando `<canvas>` y `Framer Motion`
+para mostrar títulos animados. El efecto visual de fondo se adapta a la pantalla y es interactivo con el tamaño del viewport.
+
+Funcionalidades:
+- Canvas dinámico que ajusta resolución y tamaño al redimensionar la ventana.
+- Animación de esferas con colores y brillo pulsante.
+- Mensajes y títulos animados usando `framer-motion`.
+- Optimización para rendimiento en dispositivos móviles.
+
+@component
+@returns {JSX.Element} Sección animada con mensajes promocionales y visual interactivo.
+*/
+
+
 export function ContactPageHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 

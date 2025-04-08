@@ -1,6 +1,16 @@
 import { BarChart3, Code, HomeIcon, MonitorCogIcon, PhoneCallIcon, SquareKanbanIcon, Users } from "lucide-react"
 import { Testimonial } from "./types"
 
+/**
+Archivo de constantes globales utilizadas en la app.
+
+- `SUCCESS_CASES`: Casos de éxito con estadísticas para mostrar resultados de implementación.
+- `SERVICES`: Lista de servicios ofrecidos con descripción e íconos.
+- `TESTIMONIALS`: Testimonios de clientes usados para mostrar credibilidad.
+- `HOME_LINKS`: Enlaces del menú principal de navegación con íconos.
+- `PAGES_LINKS`: Enlaces de autenticación para login y registro.
+*/
+
 export const SUCCESS_CASES = [
     {
         title: "Empresa Tecnológica",

@@ -24,6 +24,34 @@ import { z } from "zod";
 
 interface PageProps {}
 
+/**
+Componente `Page` – Vista principal de inicio de sesión.
+
+Este componente permite a los usuarios autenticarse usando correo electrónico y contraseña.
+Valida el formulario con `zod`, maneja sesiones con `next-auth`, y redirecciona según el rol del usuario.
+
+Funcionalidades:
+- Validación de campos con Zod y React Hook Form.
+- Spinner de carga mientras se realiza el proceso.
+- Autenticación con `LoginCredentials`.
+- Redirección automática si el usuario ya está autenticado.
+- Soporte para roles: redirige a "/admin/dashboard" si es administrador, o a "/dashboard" si es usuario normal.
+
+Librerías utilizadas:
+- `react-hook-form` y `zod` para manejo y validación del formulario.
+- `next-auth` para autenticación y manejo de sesiones.
+- `lucide-react` para iconos.
+- `sonner` para notificaciones emergentes.
+
+@returns {JSX.Element} Página de login renderizada.
+
+@example
+// Este componente es la página de /login
+export default function LoginPage() {
+  return <Page />
+} */
+
+
 const Page: FC<PageProps> = ({}) => {
   const [isPending, startTransition] = useTransition()
   const form = useForm<z.infer<typeof loginSchema>>({

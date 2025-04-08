@@ -2,6 +2,27 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+Componente: Card
+
+Descripción:
+- Conjunto de componentes reutilizables para crear tarjetas (cards) con estructura modular.
+- Incluye cabecera, título, descripción, contenido, acciones y pie de tarjeta.
+
+Componentes exportados:
+- `Card`: Contenedor principal de la tarjeta.
+- `CardHeader`: Cabecera de la tarjeta.
+- `CardTitle`: Título del contenido.
+- `CardDescription`: Descripción opcional.
+- `CardAction`: Elemento de acción alineado a la derecha.
+- `CardContent`: Cuerpo principal del contenido.
+- `CardFooter`: Pie de la tarjeta, útil para botones u opciones.
+
+Props comunes:
+- `className` (string): Clases personalizadas para estilos adicionales.
+- También acepta cualquier otra propiedad válida de un `<div>`.
+*/
+
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

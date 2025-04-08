@@ -6,12 +6,14 @@ import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/// Componente raíz del menú desplegable, envuelve el componente Root de Radix.
 function DropdownMenu({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
 }
 
+/// Portal que renderiza el contenido del menú fuera del flujo del DOM padre.
 function DropdownMenuPortal({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>) {
@@ -20,6 +22,7 @@ function DropdownMenuPortal({
   )
 }
 
+/// Botón o elemento que activa la apertura del menú desplegable.
 function DropdownMenuTrigger({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
@@ -31,6 +34,7 @@ function DropdownMenuTrigger({
   )
 }
 
+/// Contenedor principal del menú desplegable, con estilos animados y posición.
 function DropdownMenuContent({
   className,
   sideOffset = 4,
@@ -51,6 +55,7 @@ function DropdownMenuContent({
   )
 }
 
+/// Agrupador de elementos dentro del menú desplegable.
 function DropdownMenuGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
@@ -59,6 +64,7 @@ function DropdownMenuGroup({
   )
 }
 
+/// Elemento de opción dentro del menú desplegable, con variantes como destructivo.
 function DropdownMenuItem({
   className,
   inset,
@@ -81,7 +87,7 @@ function DropdownMenuItem({
     />
   )
 }
-
+/// Elemento con casilla de verificación dentro del menú desplegable.
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -108,6 +114,7 @@ function DropdownMenuCheckboxItem({
   )
 }
 
+/// Agrupa ítems de tipo radio dentro del menú desplegable.
 function DropdownMenuRadioGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
@@ -119,6 +126,7 @@ function DropdownMenuRadioGroup({
   )
 }
 
+/// Opción tipo radio dentro del menú desplegable, muestra un icono circular si está seleccionada.
 function DropdownMenuRadioItem({
   className,
   children,
@@ -143,6 +151,7 @@ function DropdownMenuRadioItem({
   )
 }
 
+/// Etiqueta o título descriptivo para una sección del menú.
 function DropdownMenuLabel({
   className,
   inset,
@@ -163,6 +172,7 @@ function DropdownMenuLabel({
   )
 }
 
+/// Separador visual entre secciones del menú.
 function DropdownMenuSeparator({
   className,
   ...props
@@ -176,6 +186,7 @@ function DropdownMenuSeparator({
   )
 }
 
+/// Texto pequeño alineado a la derecha que representa un atajo de teclado.
 function DropdownMenuShortcut({
   className,
   ...props
@@ -192,12 +203,14 @@ function DropdownMenuShortcut({
   )
 }
 
+/// Componente que representa un submenú anidado dentro del menú principal.
 function DropdownMenuSub({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>) {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />
 }
 
+/// Activador del submenú, se muestra con un ícono hacia la derecha.
 function DropdownMenuSubTrigger({
   className,
   inset,
@@ -222,6 +235,7 @@ function DropdownMenuSubTrigger({
   )
 }
 
+/// Contenedor para los ítems del submenú, con estilos de animación y posición.
 function DropdownMenuSubContent({
   className,
   ...props
@@ -238,6 +252,7 @@ function DropdownMenuSubContent({
   )
 }
 
+/// Exportación de todos los componentes relacionados con el menú desplegable.
 export {
   DropdownMenu,
   DropdownMenuPortal,

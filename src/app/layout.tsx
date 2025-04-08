@@ -9,6 +9,23 @@ export const metadata = {
     "Plataforma para la gestión de servicios con sistema de roles de usuario",
 };
 
+/**
+Componente `RootLayout` – Layout raíz de la aplicación.
+
+Este componente configura la estructura base HTML del proyecto, aplicando el proveedor de sesión (`SessionProvider`)
+para la autenticación con NextAuth y añadiendo el componente de notificaciones `Toaster`.
+
+Funcionalidades:
+- Aplica la fuente personalizada "Space Grotesk" al body.
+- Define metadatos globales para la app.
+- Provee el contexto de sesión para la autenticación.
+- Integra sistema de notificaciones.
+
+@component
+@param {React.ReactNode} children - Componentes hijos que se renderizan dentro del layout.
+@returns {JSX.Element} Estructura base HTML de la aplicación.
+*/
+
 export default function RootLayout({
   children,
 }: {

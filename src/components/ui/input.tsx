@@ -2,6 +2,15 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+Este archivo define un componente de entrada (`Input`) reutilizable para formularios.
+
+Su objetivo es estandarizar el estilo de los campos de entrada en la aplicación,
+asegurando consistencia visual, soporte para accesibilidad y compatibilidad con múltiples tipos de entrada.
+
+Utiliza Tailwind CSS para los estilos y admite personalización mediante `className`.
+*/
+
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

@@ -12,11 +12,20 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form"
+/**
+Componente proveedor del contexto de formulario que permite compartir métodos y estado
+entre todos los componentes del formulario usando React Hook Form.
+*/
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
 const Form = FormProvider
+
+/**
+Tipo que representa el valor del contexto de un campo del formulario.
+Incluye el nombre del campo actual dentro del formulario.
+*/
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -25,9 +34,20 @@ type FormFieldContextValue<
   name: TName
 }
 
+/**
+Contexto que permite compartir el nombre de un campo del formulario
+con los componentes hijos que lo requieran (como etiquetas o mensajes de error).
+*/
+
 const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue
 )
+
+/**
+Componente que envuelve un campo controlado del formulario.
+Proporciona el nombre del campo a través de un contexto interno
+y lo conecta al controlador de React Hook Form.
+*/
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -41,6 +61,12 @@ const FormField = <
     </FormFieldContext.Provider>
   )
 }
+
+/**
+Hook personalizado que permite acceder a la información y estado
+de un campo específico del formulario, incluyendo identificadores,
+errores y metadatos asociados.
+*/
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
@@ -73,6 +99,11 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 )
 
+/**
+Componente contenedor que agrupa un campo del formulario con su etiqueta,
+mensaje de error y descripción. Proporciona un ID único vía contexto.
+*/
+
 function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   const id = React.useId()
 
@@ -86,6 +117,11 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
     </FormItemContext.Provider>
   )
 }
+
+/**
+Componente de etiqueta (`label`) asociado a un campo del formulario.
+Cambia su estilo si hay un error y se vincula correctamente al campo por accesibilidad.
+*/
 
 function FormLabel({
   className,
@@ -103,6 +139,11 @@ function FormLabel({
     />
   )
 }
+
+/**
+Componente que envuelve el control del formulario (como `input`, `select`, etc.).
+Se conecta con el campo para añadir atributos de accesibilidad y errores.
+*/
 
 function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
@@ -122,6 +163,11 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
   )
 }
 
+/**
+Componente que muestra una descripción adicional para el campo del formulario.
+Utiliza el ID correspondiente para accesibilidad.
+*/
+
 function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
   const { formDescriptionId } = useFormField()
 
@@ -134,6 +180,11 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
     />
   )
 }
+
+/**
+Componente que muestra un mensaje de error si existe,
+o contenido personalizado si no hay error. Se enlaza correctamente con el campo.
+*/
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField()

@@ -5,6 +5,15 @@ import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
 
 import { cn } from "@/lib/utils"
 
+/**
+Componente `ScrollArea` que proporciona una zona de desplazamiento personalizada.
+Usa `Radix ScrollArea.Root` y configura el `Viewport`, la `Scrollbar` y la `Corner`.
+
+@param className - Clases adicionales para el contenedor principal.
+@param children - Elementos hijos que estarán dentro del área con scroll.
+@param props - Cualquier otra propiedad que será pasada al contenedor raíz.
+*/
+
 function ScrollArea({
   className,
   children,
@@ -27,6 +36,16 @@ function ScrollArea({
     </ScrollAreaPrimitive.Root>
   )
 }
+
+/**
+Componente `ScrollBar` que representa una barra de desplazamiento personalizada
+para orientación vertical u horizontal.
+Usa `Radix ScrollAreaScrollbar` y configura su apariencia y comportamiento.
+
+@param className - Clases adicionales para personalizar la barra.
+@param orientation - Dirección de desplazamiento: 'vertical' (por defecto) u 'horizontal'.
+@param props - Cualquier otra propiedad que será pasada a la barra de scroll.
+*/
 
 function ScrollBar({
   className,

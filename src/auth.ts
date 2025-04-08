@@ -14,6 +14,16 @@ declare module "next-auth"{
     }
 }
 
+/**
+Configuración principal de NextAuth con adaptador Prisma.
+
+- Se extiende el objeto `session.user` para incluir el rol del usuario.
+- `signIn`: Permite el acceso solo si el usuario existe y usa proveedor de credenciales.
+- `session`: Añade el `id`, `role` y `name` del usuario al objeto de sesión.
+- `jwt`: Incluye información del usuario en el token (rol y nombre completo).
+- Se utiliza JWT como estrategia de sesión.
+*/
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async signIn({ user, account }){

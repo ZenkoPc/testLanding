@@ -4,6 +4,21 @@ import { Card, CardContent } from "../ui/card";
 import { SERVICES } from "@/constants";
 import { BorderBeam } from "../magicui/border-beam";
 
+/**
+Componente `ServicesSection` – Muestra los servicios ofrecidos por la plataforma.
+
+Sección visualmente atractiva que describe las soluciones clave: gestión de usuarios,
+servicios digitales personalizados y otros servicios adicionales listados dinámicamente.
+
+Estructura:
+- Encabezado centrado con título llamativo y descripción.
+- Dos tarjetas principales con descripciones detalladas y animación `BorderBeam`.
+- Grid adicional con servicios cargados dinámicamente desde `SERVICES`.
+- Estética basada en gradientes, efectos hover y sombras para resaltar cada tarjeta.
+
+@returns {JSX.Element} Sección de servicios con tarjetas descriptivas animadas.
+*/
+
 export function ServicesSection() {
   return (
     <section id="services" className="relative w-full py-20 overflow-hidden border-t border-white/5">
