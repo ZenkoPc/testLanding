@@ -6,6 +6,25 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+Componente: Dialog
+
+Descripción:
+- Conjunto de componentes que implementan un cuadro de diálogo accesible y estilizado, basado en `@radix-ui/react-dialog`.
+- Soporta superposición (overlay), encabezado, pie de diálogo, cierre con ícono, entre otros elementos reutilizables.
+- Adaptado para funcionar bien en pantallas pequeñas y grandes con animaciones suaves.
+
+Componentes exportados:
+- `Dialog`: Contenedor raíz del diálogo.
+- `DialogTrigger`: Elemento que activa la apertura del diálogo.
+- `DialogContent`: Contenido visible del diálogo.
+- `DialogClose`: Botón de cierre accesible.
+- `DialogOverlay`: Superposición semitransparente que cubre el fondo.
+- `DialogPortal`: Renderiza el diálogo en un portal fuera del flujo normal del DOM.
+- `DialogHeader`, `DialogFooter`: Contenedores para título y acciones, respectivamente.
+- `DialogTitle`, `DialogDescription`: Elementos accesibles para encabezado y descripción.
+*/
+
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {

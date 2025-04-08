@@ -35,6 +35,19 @@ const buttonVariants = cva(
   }
 )
 
+/**
+Componente `Button` reutilizable con estilos personalizados.
+Permite variaciones de tamaño y estilo a través de `variant` y `size`.
+
+@param {string} className - Clases adicionales para personalizar el estilo.
+@param {"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"} variant - Variante de diseño visual.
+@param {"default" | "sm" | "lg" | "icon"} size - Tamaño del botón.
+@param {boolean} asChild - Si es `true`, utiliza el componente `Slot` en lugar de `button`.
+@param {any} props - Otros props del botón estándar de HTML.
+
+@returns {JSX.Element} Botón estilizado según las variantes definidas.
+*/
+
 function Button({
   className,
   variant,

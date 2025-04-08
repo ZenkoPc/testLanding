@@ -8,6 +8,14 @@ import { db } from "@/lib/models/db"
 import { signIn } from "@/auth"
 import { AuthError } from "next-auth"
 
+/**
+Registra un nuevo usuario utilizando los datos del formulario.
+
+Esta función valida los campos ingresados con `registerSchema`,
+verifica si ya existe una cuenta con el correo proporcionado, 
+hashea la contraseña, crea el nuevo usuario en la base de datos
+y luego inicia sesión automáticamente. */
+
 export async function RegisterCredentials(values: z.infer<typeof registerSchema>){
 
     const validatedFields = registerSchema.safeParse(values)

@@ -1,6 +1,22 @@
 import { ChevronRight, ExternalLink, Zap } from "lucide-react";
 import { Button } from "../ui/button";
 
+/**
+Componente `ContactSection` – Sección de contacto con formulario y botones de acción.
+
+Presenta una interfaz atractiva para que los usuarios puedan comunicarse con el equipo
+a través de un formulario o mediante botones para contacto directo o visualización de una demo.
+
+Características:
+- Título con efecto de gradiente animado.
+- Descripción informativa sobre el soporte y disponibilidad del equipo.
+- Botones interactivos para "Contactar ahora" y "Ver demo".
+- Formulario de contacto con campos: nombre, email y mensaje.
+- Efectos visuales con animaciones, desenfoques y gradientes.
+
+@returns {JSX.Element} Sección visual con formulario y botones para contactar al equipo.
+*/
+
 export function ContactSection(){
     return(
         <section className="w-full py-24 relative overflow-hidden border-t border-white/5">

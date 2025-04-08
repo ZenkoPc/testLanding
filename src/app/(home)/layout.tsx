@@ -12,6 +12,23 @@ export const metadata = {
     "Plataforma para la gestión de servicios con sistema de roles de usuario",
 };
 
+/**
+Componente `RootLayout` – Estructura principal de la aplicación.
+
+Define el layout base que incluye:
+- Sidebar de navegación (`HomeSidebar`)
+- Header y Footer comunes a todas las páginas
+- Proveedores de contexto para tema (`ThemeProvider`) y estado del sidebar (`SidebarProvider`)
+
+Aplica estilos generales, tema oscuro, y estructura la interfaz general.
+
+@component
+@param {Object} props - Props del componente.
+@param {React.ReactNode} props.children - Componentes hijos renderizados dentro del layout.
+@returns {JSX.Element} Layout principal de la aplicación.
+*/
+
+
 export default function RootLayout({
   children,
 }: {

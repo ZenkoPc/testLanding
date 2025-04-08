@@ -18,6 +18,22 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SidebarProps {}
 
+/**
+Componente `Sidebar` – Barra lateral de navegación del panel de administración.
+
+Muestra enlaces de navegación dependiendo del rol del usuario (actualmente `isAdmin` está en `true`).
+Adapta su comportamiento según el tamaño de pantalla mediante el hook `useIsMobile`.
+
+Funcionalidades:
+- Enlaces dinámicos con estado activo según la ruta actual.
+- Diseño responsive con animaciones de entrada y salida para móviles.
+- Botón para cerrar sesión utilizando `signOut()` de `next-auth`.
+- Control de apertura/cierre del menú con animaciones y prevención de doble clic rápido.
+
+@component
+@returns {JSX.Element} Menú lateral interactivo y responsivo.
+*/
+
 const Sidebar: FC<SidebarProps> = ({}) => {
   const isAdmin = true;
   const SideBar = useRef<HTMLDivElement>(null);

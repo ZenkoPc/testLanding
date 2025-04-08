@@ -4,6 +4,22 @@ import AutoScroll from "embla-carousel-auto-scroll"
 import { retrieveTestimonials } from "@/lib/functions";
 import { TESTIMONIALS } from "@/constants";
 
+/**
+Componente `TestimonialsSection` – Sección de testimonios de clientes.
+
+Presenta una sección de carrusel con testimonios cargados dinámicamente usando `retrieveTestimonials`.
+Muestra una animación de carga mientras se obtienen los datos y luego un carrusel que se desliza automáticamente,
+utilizando la librería `embla-carousel-auto-scroll`.
+
+Características:
+- Encabezado con título y descripción.
+- Efecto de desplazamiento automático en el carrusel.
+- Cada testimonio incluye texto, avatar, nombre y empresa.
+- Estilizado con fondo degradado, animaciones suaves y efectos de hover.
+
+@returns {JSX.Element} Sección visualmente atractiva de testimonios en carrusel.
+*/
+
 export function TestimonialsSection() {
   const testimonialsRef = useRef<HTMLDivElement>(null);
   const [testimonials, setTestimonials] = useState<typeof TESTIMONIALS>([]);

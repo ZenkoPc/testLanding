@@ -9,6 +9,28 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
+/**
+Componente: Carousel
+
+Descripción:
+- Implementa un carrusel accesible y flexible usando `embla-carousel-react`.
+- Soporta orientación horizontal o vertical, navegación por botones y teclado.
+- Acepta plugins para extender su funcionalidad (por ejemplo, auto-scroll).
+
+Componentes exportados:
+- `Carousel`: Contenedor principal que gestiona la lógica y el contexto del carrusel.
+- `CarouselContent`: Área visible del carrusel donde se ubican los ítems.
+- `CarouselItem`: Elemento individual deslizable dentro del carrusel.
+- `CarouselPrevious`: Botón para ir al ítem anterior.
+- `CarouselNext`: Botón para ir al siguiente ítem.
+
+Props principales:
+- `opts`: Configuraciones del carrusel (`axis`, `loop`, etc.).
+- `plugins`: Lista de plugins opcionales.
+- `orientation`: Dirección del scroll (`horizontal` o `vertical`).
+- `setApi`: Callback para obtener la instancia de la API del carrusel.
+*/
+
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]

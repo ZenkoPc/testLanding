@@ -6,6 +6,13 @@ import { getUserByEmail } from "@/user/user"
 import { AuthError } from "next-auth"
 import * as z from "zod"
 
+/**
+Inicia sesión de un usuario utilizando credenciales (correo y contraseña).
+
+Esta función valida los datos de entrada usando el esquema `loginSchema`,
+verifica la existencia del usuario y, dependiendo del rol (ADMIN o usuario común),
+realiza el proceso de inicio de sesión con la redirección correspondiente. */
+
 export async function LoginCredentials(values: z.infer<typeof loginSchema>){
 
     const validatedFields = loginSchema.safeParse(values)

@@ -34,6 +34,23 @@ const itemSchema = z.object({
   imageUrl: z.string().url({ message: "La URL de la imagen es inválida" }),
 });
 
+/**
+Componente `CreateItemModal` – Modal para agregar nuevos productos.
+
+Usa `Dialog` de Radix UI para mostrar un formulario con validación basada en `zod` y `react-hook-form`.
+Permite ingresar nombre, descripción, precio y URL de imagen de un producto.
+
+Funcionalidades:
+- Validación de campos con mensajes personalizados.
+- Diseño responsivo y accesible.
+- Interfaz amigable con estilos personalizados.
+- Lógica de envío que actualmente imprime en consola los datos ingresados.
+
+@component
+@returns {JSX.Element} Modal interactivo para registrar un nuevo producto.
+*/
+
+
 const CreateItemModal: FC<CreateItemModalProps> = ({}) => {
   const form = useForm<z.infer<typeof itemSchema>>({
     resolver: zodResolver(itemSchema),

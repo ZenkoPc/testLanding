@@ -1,5 +1,19 @@
 import Link from "next/link";
 
+/**
+Componente `HomeFooter` – Pie de página del sitio web.
+
+Proporciona información básica de la empresa y enlaces rápidos a secciones clave.
+
+Características:
+- Logo y nombre de la empresa con gradiente decorativo.
+- Descripción breve de los servicios.
+- Enlaces a "Contáctanos", "Dashboard" y "Términos".
+- Sección final con derechos reservados.
+
+@returns {JSX.Element} Sección footer informativa y accesible.
+*/
+
 export function HomeFooter(){
     return(
         <footer className="w-full bg-[#050505] text-white border-t border-white/10">

@@ -1,3 +1,9 @@
+/**
+ * Layout de la página de inicio de sesión.
+ * 
+ * Este componente define el layout específico para la ruta de login,
+ * incluyendo metadatos para SEO y compatibilidad con Next.js. */
+
 export const metadata = {
   title: "Login - Iniciar Sesion",
   description:

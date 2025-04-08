@@ -9,6 +9,20 @@ import { Logo } from "../icons/logo";
 import { HOME_LINKS } from "@/constants";
 import { usePathname } from 'next/navigation';
 
+/**
+Componente `HomeHeader` – Encabezado principal del sitio web.
+
+Proporciona navegación principal con estilo dinámico que cambia al hacer scroll.
+
+Características:
+- Logo visible y navegación con enlaces definidos en `HOME_LINKS`.
+- Estilo translúcido activado al hacer scroll.
+- Botón de contacto visible solo en pantallas grandes.
+- Trigger de sidebar visible solo en pantallas pequeñas.
+
+@returns {JSX.Element} Encabezado fijo con navegación adaptativa y responsiva.
+*/
+
 export function HomeHeader(){
 
     const [scrolled, setScrolled] = useState(false)

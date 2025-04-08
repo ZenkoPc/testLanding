@@ -3,6 +3,20 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { PAGES_LINKS } from "@/constants";
 
+/**
+Componente `CallToActionSection` – Sección de llamada a la acción (CTA).
+
+Muestra un mensaje atractivo para motivar al usuario a registrarse o contactar con ventas.
+Utiliza estilos con gradientes y animaciones para destacar visualmente los botones.
+
+Funcionalidades:
+- Texto con efecto de gradiente para el título.
+- Fondo decorativo con degradado radial y opacidad.
+- Botones con efectos de hover que redirigen a rutas definidas (registro y contacto).
+
+@returns {JSX.Element} Sección visual para incentivar la acción del usuario.
+*/
+
 export function CallToActionSection(){
     return(
         <section className="w-full py-24 relative overflow-hidden border-t border-white/5">

@@ -18,6 +18,22 @@ interface Item {
   price: number;
 }
 
+/**
+Componente `Page` – Vista de productos del panel de administrador.
+
+Muestra una cuadrícula de productos disponibles, cada uno con su nombre, descripción, imagen y precio.
+Si el usuario es administrador (`isAdmin`), se muestran opciones para crear y eliminar productos.
+
+Funcionalidades:
+- Visualización de una lista de productos con sus detalles.
+- Botón para crear un nuevo producto (solo visible para administradores).
+- Menú de opciones con acción de eliminación por producto (solo para administradores).
+
+@component
+@returns {JSX.Element} Interfaz de gestión de productos.
+*/
+
+
 const Page: FC<PageProps> = ({}) => {
   const isAdmin = true;
 

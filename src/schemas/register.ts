@@ -1,5 +1,12 @@
 import * as z from 'zod'
 
+/**
+Esquema de validación para el formulario de registro.
+Valida nombre, apellido, correo y una contraseña segura con:
+- mínimo 6 caracteres
+- al menos una mayúscula, una minúscula, un número y un carácter especial.
+*/
+
 export const registerSchema = z.object({
   firstName: z.string().min(1, "Por favor, introduce tu nombre"),
   lastName: z.string().min(1, "Por favor, introduce tu apellido"),

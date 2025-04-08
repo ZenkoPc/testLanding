@@ -3,6 +3,20 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { PAGES_LINKS } from "@/constants";
 
+/**
+Componente `HomeHero` – Sección introductoria de la página principal.
+
+Presenta un mensaje principal llamativo con un diseño visual atractivo y responsivo.
+
+Estructura:
+- Fondo con gradiente radial animado.
+- Título grande con texto en gradiente, acompañado de bloques visuales que representan etapas del proceso (registro y gestión).
+- Subtítulo con descripción breve de beneficios.
+- Botón de llamada a la acción que redirige al primer enlace de `PAGES_LINKS`.
+
+@returns {JSX.Element} Sección hero visualmente destacada con llamada a la acción.
+*/
+
 export function HomeHero(){
     return(
         <section className="relative w-full py-24 md:py-32 lg:py-40 overflow-hidden">

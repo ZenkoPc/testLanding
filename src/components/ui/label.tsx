@@ -5,6 +5,15 @@ import * as LabelPrimitive from "@radix-ui/react-label"
 
 import { cn } from "@/lib/utils"
 
+/**
+Este archivo define un componente `Label` reutilizable basado en Radix UI.
+
+Su propósito es estandarizar el estilo y comportamiento de las etiquetas (labels)
+en los formularios de la aplicación, mejorando la accesibilidad y la experiencia de usuario.
+
+Aplica estilos consistentes con Tailwind CSS y admite personalización mediante `className`.
+*/
+
 function Label({
   className,
   ...props

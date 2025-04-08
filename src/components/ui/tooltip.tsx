@@ -5,6 +5,12 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
+/**
+Proveedor de tooltips que establece el retraso antes de mostrar el tooltip.
+
+@param props - Propiedades del componente `TooltipPrimitive.Provider`.
+*/
+
 function TooltipProvider({
   delayDuration = 0,
   ...props
@@ -18,6 +24,13 @@ function TooltipProvider({
   )
 }
 
+/**
+Componente raíz del tooltip que agrupa el contenido y el trigger.
+Se envuelve automáticamente en `TooltipProvider`.
+
+@param props - Propiedades del componente `TooltipPrimitive.Root`.
+*/
+
 function Tooltip({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
@@ -28,11 +41,26 @@ function Tooltip({
   )
 }
 
+/**
+Elemento que dispara la aparición del tooltip cuando se interactúa con él.
+
+@param props - Propiedades del componente `TooltipPrimitive.Trigger`.
+*/
+
 function TooltipTrigger({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
 }
+
+/**
+Contenido visual del tooltip, muestra la información cuando el trigger se activa.
+
+@param className - Clases personalizadas de estilo.
+@param sideOffset - Separación desde el trigger.
+@param children - Contenido del tooltip.
+@param props - Propiedades adicionales del componente `TooltipPrimitive.Content`.
+*/
 
 function TooltipContent({
   className,

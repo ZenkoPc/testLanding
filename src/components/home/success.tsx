@@ -4,6 +4,20 @@ import { SUCCESS_CASES } from "@/constants";
 import { Card } from "../ui/card";
 import { BorderBeam } from "../magicui/border-beam";
 
+/**
+Componente `SuccessCasesSection` – Sección de presentación de casos de éxito.
+
+Muestra testimonios y resultados clave de clientes anteriores utilizando tarjetas dinámicas 
+basadas en los datos del arreglo `SUCCESS_CASES`.
+
+Características:
+- Encabezado destacado con cita inspiradora.
+- Tres tarjetas con título, descripción, estadística destacada y una animación decorativa (`BorderBeam`).
+- Fondo degradado y efectos de escala al pasar el cursor.
+
+@returns {JSX.Element} Sección de testimonios con estadísticas visuales.
+*/
+
 export function SuccessCasesSection() {
   return (
     <section className="relative w-full overflow-visible border-t border-white/5">

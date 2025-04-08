@@ -24,6 +24,23 @@ import { z } from "zod";
 
 interface PageProps {}
 
+/**
+Componente `Page` – Página de Registro de Usuarios.
+
+Este componente permite a nuevos usuarios crear una cuenta llenando un formulario con nombre, apellido, correo y contraseña.
+Valida los datos usando `zod` y maneja el envío del formulario usando `react-hook-form`.
+
+Funcionalidades:
+- Validación de campos con `registerSchema`.
+- Envío de datos al backend a través de la función `RegisterCredentials`.
+- Muestra una pantalla de carga durante el registro.
+- Redirección automática según el rol del usuario después del registro.
+
+@component
+@returns {JSX.Element} Interfaz de registro de usuario.
+*/
+
+
 const Page: FC<PageProps> = ({}) => {
   const [isPending, startTransition] = useTransition()
 

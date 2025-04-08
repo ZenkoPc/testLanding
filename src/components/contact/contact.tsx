@@ -4,6 +4,21 @@ import { ChevronRight } from "lucide-react"
 import { Button } from "../ui/button"
 import { toast } from "sonner"
 
+/**
+Componente `ContactSection` – Sección de Contacto del sitio.
+
+Renderiza un formulario para que los usuarios se pongan en contacto con el equipo. Valida los campos del formulario
+y muestra mensajes con `toast` dependiendo del resultado del envío.
+
+Funcionalidades:
+- Validación básica de longitud mínima (mayor a 4 caracteres) para nombre, correo y mensaje.
+- Notificación con `toast` para errores o envío exitoso.
+- Diseño adaptativo y responsivo.
+
+@component
+@returns {JSX.Element} Sección de contacto con formulario.
+*/
+
 export function ContactSection() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
