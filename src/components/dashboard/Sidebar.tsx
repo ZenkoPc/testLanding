@@ -2,22 +2,18 @@
 
 import { cn } from "@/lib/utils";
 import {
-  CreditCard,
-  House,
   LogOut,
-  Menu,
-  Package,
-  Users,
+  Menu, Users,
   X
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SidebarProps {
-  isAdmin: boolean
+  isAdmin: boolean;
 }
 
 /**
@@ -39,24 +35,30 @@ Funcionalidades:
 const Sidebar: FC<SidebarProps> = ({ isAdmin }: { isAdmin: boolean }) => {
   const SideBar = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const [links, setLinks] = useState<any[]>([])
+  const [links, setLinks] = useState<any[]>([
+    {
+      label: "Usuarios",
+      href: "/dashboard/admin",
+      icon: <Users />,
+    },
+  ]);
 
-  useEffect(() => {
-    setLinks([
-      { label: "Inicio", href: isAdmin ? "/dashboard/admin" : "/dashboard/users", icon: <House /> },
-      { label: "Servicios", href: isAdmin ? "/dashboard/admin/services" : "/dashboard/services", icon: <CreditCard /> },
-      ...(isAdmin
-        ? [
-            {
-              label: "Productos",
-              href: "/dashboard/admin/products",
-              icon: <Package />,
-            },
-            { label: "Usuarios", href: "/dashboard/admin/users", icon: <Users /> },
-          ]
-        : []),
-    ])
-  }, [])
+  // useEffect(() => {
+  //   setLinks([
+  //     { label: "Inicio", href: isAdmin ? "/dashboard/admin" : "/dashboard/users", icon: <House /> },
+  //     { label: "Servicios", href: isAdmin ? "/dashboard/admin/services" : "/dashboard/services", icon: <CreditCard /> },
+  //     ...(isAdmin
+  //       ? [
+  //           {
+  //             label: "Productos",
+  //             href: "/dashboard/admin/products",
+  //             icon: <Package />,
+  //           },
+  //           { label: "Usuarios", href: "/dashboard/admin/users", icon: <Users /> },
+  //         ]
+  //       : []),
+  //   ])
+  // }, [])
 
   const getIsActive = (href: string) => {
     return pathname === href;
