@@ -3,7 +3,8 @@
 import { cn } from "@/lib/utils";
 import {
   LogOut,
-  Menu, Users,
+  Menu,
+  Users,
   X
 } from "lucide-react";
 import { signOut } from "next-auth/react";
@@ -11,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ADMIN_SIDEBAR, USER_SIDEBAR } from "@/constants";
 
 interface SidebarProps {
   isAdmin: boolean;
@@ -37,7 +39,7 @@ const Sidebar: FC<SidebarProps> = ({ isAdmin }: { isAdmin: boolean }) => {
   const pathname = usePathname();
   const [links, setLinks] = useState<any[]>([
     {
-      label: "Usuarios",
+      label: isAdmin ? "Usuarios": "Perfil",
       href: "/dashboard/admin",
       icon: <Users />,
     },
