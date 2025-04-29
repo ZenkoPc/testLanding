@@ -1,5 +1,7 @@
 import type React from "react";
 import "@/app/globals.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 export const metadata = {
   title: "ServiciosPro - Gestión de Servicios y Usuarios",
@@ -23,11 +25,22 @@ Funcionalidades:
 */
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const session = await auth()
+  
+  if(session?.user && session?.user.role === "ADMIN"){
+    redirect('/dashboard/admin')
+  }
+
+  if(session?.user && session?.user.role === "USER"){
+    redirect('/dashboard/users')
+  }
+
   return (
     <>
       {children}

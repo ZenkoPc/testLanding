@@ -1,6 +1,8 @@
 'use server'
 
 import { TESTIMONIALS } from "@/constants"
+import { db } from "./models/db"
+import bcrypt from "bcryptjs"
 
 /**
 Recupera testimonios desde la API externa de usuarios aleatorios y los adapta
@@ -29,4 +31,29 @@ export async function retrieveTestimonials(){
         ...tamedTestimonials,
         ...tamedTestimonials
     ]
+}
+
+export async function setAdmin(){
+    const existingUser = await db.user.findFirst({
+        where: {
+            role: "ADMIN"
+        }
+    })
+
+    if(!existingUser){
+        const hashedPass = await bcrypt.hash("Soyeladmin1.", 10)
+        await db.user.create({
+            data: {
+                firstName: "Andres",
+                lastName: "Obando",
+                email: "andres@gmail.com",
+                password: hashedPass,
+                role: "ADMIN",
+                age: 22,
+                createdAt: new Date()
+            }
+        })
+    }
+
+    return true
 }

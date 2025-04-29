@@ -13,10 +13,12 @@ import {
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-interface SidebarProps {}
+interface SidebarProps {
+  isAdmin: boolean
+}
 
 /**
 Componente `Sidebar` – Barra lateral de navegación del panel de administración.
@@ -34,24 +36,28 @@ Funcionalidades:
 @returns {JSX.Element} Menú lateral interactivo y responsivo.
 */
 
-const Sidebar: FC<SidebarProps> = ({}) => {
-  const isAdmin = true;
+const Sidebar: FC<SidebarProps> = ({ isAdmin }: { isAdmin: boolean }) => {
   const SideBar = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const links = [
-    { label: "Inicio", href: "/dashboard", icon: <House /> },
-    { label: "Servicios", href: "/dashboard/services", icon: <CreditCard /> },
-    ...(isAdmin
-      ? [
-          {
-            label: "Productos",
-            href: "/dashboard/products",
-            icon: <Package />,
-          },
-          { label: "Usuarios", href: "/dashboard/users", icon: <Users /> },
-        ]
-      : []),
-  ];
+  const [links, setLinks] = useState<any[]>([])
+
+  useEffect(() => {
+    setLinks([
+      { label: "Inicio", href: "/dashboard", icon: <House /> },
+      { label: "Servicios", href: "/dashboard/services", icon: <CreditCard /> },
+      ...(isAdmin
+        ? [
+            {
+              label: "Productos",
+              href: "/dashboard/products",
+              icon: <Package />,
+            },
+            { label: "Usuarios", href: "/dashboard/users", icon: <Users /> },
+          ]
+        : []),
+    ])
+  }, [])
+
   const getIsActive = (href: string) => {
     return pathname === href;
   };

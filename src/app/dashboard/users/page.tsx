@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import CreateItemModal from "@/components/dashboard/CreateItemModal";
 import {
   DropdownMenu,
@@ -6,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { EllipsisVertical } from "lucide-react";
+import { redirect } from "next/navigation";
 import { FC } from "react";
 
 interface PageProps {}
@@ -34,7 +36,14 @@ Funcionalidades:
 */
 
 
-const Page: FC<PageProps> = ({}) => {
+const Page: FC<PageProps> = async ({}) => {
+
+  const session = await auth()
+
+  if(session?.user.role === "ADMIN"){
+    redirect('/dashboard/admin')
+  }
+
   const isAdmin = true;
 
   const items: Item[] = [
