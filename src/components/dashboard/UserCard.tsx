@@ -29,7 +29,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -40,6 +40,10 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "../ui/alert-dialog";
+import { DeleteUser, UpdateUser } from "@/actions/getUsers";
+import { updateUserAdmin } from "@/schemas/updateUser";
+import { toast } from "sonner";
+import { LoaderTransparent } from "../loader";
 
 const UserSchema = z.object({
   firstName: z.string().min(1, { message: "El nombre es requerido" }),
@@ -47,6 +51,7 @@ const UserSchema = z.object({
   email: z.string().email({ message: "El email es inválido" }),
   age: z.number().nullable(),
   role: z.enum(["USER", "ADMIN"]),
+  image: z.string().optional()
 });
 
 /**
@@ -66,6 +71,7 @@ const UserSchema = z.object({
  *   @param {number} user.age - La edad del usuario.
  *   @param {string} user.role - El rol del usuario (por ejemplo, "USER", "ADMIN").
  *   @param {Date} user.createdAt - La fecha en que se creó el usuario.
+ *   @param {string} user.image - La fecha en que se creó el usuario.
  *
  * @returns {JSX.Element} Una tarjeta que muestra la información del usuario con opciones para editar o eliminar.
  *
@@ -82,19 +88,42 @@ const UserSchema = z.object({
  * />
  */
 export const UserCard = (user: User) => {
-  const form = useForm<z.infer<typeof UserSchema>>({
-    resolver: zodResolver(UserSchema),
+  const [isPending, startTransition] = useTransition()
+  const form = useForm<z.infer<typeof updateUserAdmin>>({
+    resolver: zodResolver(updateUserAdmin),
     defaultValues: {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      age: user.age,
+      age: user.age as number,
       role: user.role,
     },
   });
 
-  function onSubmit(values: z.infer<typeof UserSchema>) {
-    console.log("Nuevo producto creado:", values);
+  function onSubmit(values: z.infer<typeof updateUserAdmin>) {
+    startTransition(() => {
+      UpdateUser(values)
+        .then(() => {
+          toast.success("User updated successfully.")
+          setIsOpen(false)
+        })
+        .catch((err) => {
+          toast.error(err?.message)
+        })
+    })
+  }
+
+  const handleDelete = () => {
+    startTransition(() => {
+      DeleteUser(user.id)
+      .then(() => {
+        toast.success("User deleted successfully.")
+        setIsOpen(false)
+      })
+      .catch((err) => {
+        toast.error(err?.message)
+      })
+    })
   }
 
   const [isOpen, setIsOpen] = useState(false);
@@ -105,7 +134,7 @@ export const UserCard = (user: User) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        age: user.age,
+        age: user.age as number,
         role: user.role,
       });
     }, 150);
@@ -148,7 +177,9 @@ export const UserCard = (user: User) => {
   }, []); // Empty dependency array ensures it runs once
 
   return (
-    <div className="relative border border-[#1a1a1a] rounded-xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform px-4 pt-6 pb-7 flex flex-col items-center justify-center">
+    <>
+      {isPending && <LoaderTransparent />}
+      <div className="relative border border-[#1a1a1a] rounded-xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform px-4 pt-6 pb-7 flex flex-col items-center justify-center">
       <div className="absolute top-2 right-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -346,12 +377,13 @@ export const UserCard = (user: User) => {
             <AlertDialogCancel className="flex-1 text-white border-white/20 bg-black hover:opacity-65">
               Cancelar
             </AlertDialogCancel>
-            <AlertDialogAction className="flex-1 bg-rose-500 text-white hover:bg-rose-500/65">
+            <AlertDialogAction onClick={handleDelete} className="flex-1 bg-rose-500 text-white hover:bg-rose-500/65">
               Eliminar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
+    </>
   );
 };

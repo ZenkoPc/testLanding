@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
+import { UsersTableAdmin } from "@/components/admin/usersTable";
 import { CreateUserModal } from "@/components/dashboard/CreateUserModal";
-import { UserCard } from "@/components/dashboard/UserCard";
-import { User } from "@/types";
 import { redirect } from "next/navigation";
 import { FC } from "react";
 
@@ -28,27 +27,6 @@ const Page: FC<PageProps> = async ({}) => {
     redirect("/dashboard/users");
   }
 
-  const users: User[] = [
-    {
-      id: "1",
-      firstName: "Juan",
-      lastName: "Pérez",
-      email: "juanperez@gmail.com",
-      age: 25,
-      role: "USER",
-      createdAt: new Date("2023-01-01"),
-    },
-    {
-      id: "2",
-      firstName: "María",
-      lastName: "Gómez",
-      email: "mariagomez@gmail.com",
-      age: 30,
-      role: "ADMIN",
-      createdAt: new Date("2023-02-01"),
-    },
-  ];
-
   return (
     <main className="text-white bg-[#050505] w-full min-h-svh flex justify-center">
       <div className="w-full max-w-6xl px-5 md:px-10 flex flex-col gap-6 py-16">
@@ -56,11 +34,7 @@ const Page: FC<PageProps> = async ({}) => {
           <h1 className="text-4xl font-bold">Usuarios</h1>
           <CreateUserModal />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {users.map((user) => (
-            <UserCard key={user.id} {...user} />
-          ))}
-        </div>
+        <UsersTableAdmin />
       </div>
     </main>
   );

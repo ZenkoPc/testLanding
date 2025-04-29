@@ -13,4 +13,5 @@ export interface User {
   age: number | null;
   role: "USER" | "ADMIN";
   createdAt: Date;
+  image?: string
 }

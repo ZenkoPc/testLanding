@@ -23,7 +23,10 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { CreateUser } from "@/actions/getUsers";
+import { toast } from "sonner";
+import { LoaderTransparent } from "../loader";
 
 const UserSchema = z.object({
   firstName: z.string().min(1, { message: "El nombre es requerido" }),
@@ -69,6 +72,7 @@ const UserSchema = z.object({
  * />
  */
 export const CreateUserModal = () => {
+  const [isPending, startTransition] = useTransition()
   const form = useForm<z.infer<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
     defaultValues: {
@@ -82,7 +86,16 @@ export const CreateUserModal = () => {
   });
 
   function onSubmit(values: z.infer<typeof UserSchema>) {
-    console.log("Nuevo producto creado:", values);
+    startTransition(() => {
+      CreateUser(values)
+        .then(() => {
+          toast.success("User created successfully.")
+          setIsOpen(false)
+        })
+        .catch((err) => {
+          toast.error(err.message)
+        })
+    })
   }
 
   const [isOpen, setIsOpen] = useState(false);
@@ -95,7 +108,9 @@ export const CreateUserModal = () => {
   const [showDelete, setShowDelete] = useState(false);
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <>
+      {isPending && <LoaderTransparent />}
+      <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button className="bg-violet-500 hover:bg-violet-500/75 rounded-xl cursor-pointer">
           Crear usuario
@@ -243,5 +258,6 @@ export const CreateUserModal = () => {
         </Form>
       </DialogContent>
     </Dialog>
+    </>
   );
 };
