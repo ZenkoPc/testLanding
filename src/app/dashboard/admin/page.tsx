@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { CreateUserModal } from "@/components/dashboard/CreateUserModal";
 import { UserCard } from "@/components/dashboard/UserCard";
 import { User } from "@/types";
 import { redirect } from "next/navigation";
@@ -51,7 +52,10 @@ const Page: FC<PageProps> = async ({}) => {
   return (
     <main className="text-white bg-[#050505] w-full min-h-svh flex justify-center">
       <div className="w-full max-w-6xl px-5 md:px-10 flex flex-col gap-6 py-16">
-        <h1 className="text-4xl font-bold">Usuarios</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl font-bold">Usuarios</h1>
+          <CreateUserModal />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {users.map((user) => (
             <UserCard key={user.id} {...user} />
