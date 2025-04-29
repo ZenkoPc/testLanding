@@ -35,7 +35,7 @@ export async function LoginCredentials(values: z.infer<typeof loginSchema>){
                 email,
                 password,
                 redirect: false,
-                redirectTo: "/admin/dashboard"
+                redirectTo: "/dashboard/admin"
             })
             return {
                 success: "Sesion iniciada correctamente",
@@ -63,7 +63,7 @@ export async function LoginCredentials(values: z.infer<typeof loginSchema>){
                 email,
                 password,
                 redirect: false,
-                redirectTo: "/dashboard"
+                redirectTo: "/dashboard/users"
             })
             return {
                 success: "Sesion iniciada correctamente",

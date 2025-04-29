@@ -1,4 +1,4 @@
-import { BarChart3, Code, HomeIcon, MonitorCogIcon, PhoneCallIcon, SquareKanbanIcon, Users } from "lucide-react"
+import { BarChart3, Code, CreditCard, HomeIcon, House, MonitorCogIcon, Package, PhoneCallIcon, SquareKanbanIcon, User, Users } from "lucide-react"
 import { Testimonial } from "./types"
 
 /**
@@ -100,7 +100,7 @@ export const HOME_LINKS = [
     icon: MonitorCogIcon
   },
   {
-    url: '/dashboard',
+    url: '/login',
     slug: "Dashboard",
     icon: SquareKanbanIcon
   },
@@ -120,4 +120,15 @@ export const PAGES_LINKS = [
     url: '/register',
     slug: "Crear cuenta"
   },
+]
+
+export const ADMIN_SIDEBAR = [
+  { label: "Inicio", href: "/dashboard/admin", icon: House },
+  { label: "Servicios", href: "/dashboard/admin/services", icon: CreditCard },
+  { label: "Productos", href: "/dashboard/admin/products", icon: Package },
+  { label: "Usuarios", href: "/dashboard/admin/users", icon: Users }
+]
+
+export const USER_SIDEBAR = [
+  { label: "Perfil", href: "/dashboard/users", icon: User }
 ]

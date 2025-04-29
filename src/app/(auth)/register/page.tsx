@@ -60,9 +60,9 @@ const Page: FC<PageProps> = ({}) => {
     if(session.status !== "authenticated") return
   
     if(session.data.user.role === "ADMIN"){
-      router.push("/admin/dashboard")
+      router.push("/dashboard/admin")
     }else{
-      router.push("/dashboard")
+      router.push("/dashboard/users")
     }
   
   }, [session])

@@ -2,11 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import {
-  CreditCard,
-  House,
   LogOut,
   Menu,
-  Package,
   Users,
   X
 } from "lucide-react";
@@ -15,8 +12,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ADMIN_SIDEBAR, USER_SIDEBAR } from "@/constants";
 
-interface SidebarProps {}
+interface SidebarProps {
+  isAdmin: boolean;
+}
 
 /**
 Componente `Sidebar` – Barra lateral de navegación del panel de administración.
@@ -34,24 +34,34 @@ Funcionalidades:
 @returns {JSX.Element} Menú lateral interactivo y responsivo.
 */
 
-const Sidebar: FC<SidebarProps> = ({}) => {
-  const isAdmin = true;
+const Sidebar: FC<SidebarProps> = ({ isAdmin }: { isAdmin: boolean }) => {
   const SideBar = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const links = [
-    { label: "Inicio", href: "/dashboard", icon: <House /> },
-    { label: "Servicios", href: "/dashboard/services", icon: <CreditCard /> },
-    ...(isAdmin
-      ? [
-          {
-            label: "Productos",
-            href: "/dashboard/products",
-            icon: <Package />,
-          },
-          { label: "Usuarios", href: "/dashboard/users", icon: <Users /> },
-        ]
-      : []),
-  ];
+  const [links, setLinks] = useState<any[]>([
+    {
+      label: isAdmin ? "Usuarios": "Perfil",
+      href: "/dashboard/admin",
+      icon: <Users />,
+    },
+  ]);
+
+  // useEffect(() => {
+  //   setLinks([
+  //     { label: "Inicio", href: isAdmin ? "/dashboard/admin" : "/dashboard/users", icon: <House /> },
+  //     { label: "Servicios", href: isAdmin ? "/dashboard/admin/services" : "/dashboard/services", icon: <CreditCard /> },
+  //     ...(isAdmin
+  //       ? [
+  //           {
+  //             label: "Productos",
+  //             href: "/dashboard/admin/products",
+  //             icon: <Package />,
+  //           },
+  //           { label: "Usuarios", href: "/dashboard/admin/users", icon: <Users /> },
+  //         ]
+  //       : []),
+  //   ])
+  // }, [])
+
   const getIsActive = (href: string) => {
     return pathname === href;
   };

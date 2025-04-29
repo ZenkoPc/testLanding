@@ -1,5 +1,7 @@
+import { auth } from "@/auth";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { redirect } from "next/navigation";
 import { FC, ReactNode } from "react";
 
 interface LayoutProps {
@@ -21,10 +23,17 @@ Funcionalidades:
 */
 
 
-const Layout: FC<LayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = async ({ children }) => {
+
+  const session = await auth()
+
+  if(!session?.user){
+    redirect("/login")
+  }
+
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      <Sidebar isAdmin={session.user.role === "ADMIN"} />
       <ScrollArea className="max-h-screen w-full">{children}</ScrollArea>
     </div>
   );
