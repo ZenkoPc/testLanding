@@ -39,7 +39,7 @@ const Sidebar: FC<SidebarProps> = ({ isAdmin }: { isAdmin: boolean }) => {
   const pathname = usePathname();
   const [links, setLinks] = useState<any[]>([
     {
-      label: "Usuarios",
+      label: isAdmin ? "Usuarios": "Perfil",
       href: "/dashboard/admin",
       icon: <Users />,
     },

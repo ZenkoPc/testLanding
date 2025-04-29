@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   Card,
   CardContent,
@@ -14,29 +14,69 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, SendIcon, User } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { SendIcon, User } from "lucide-react";
 import { BorderBeam } from "../magicui/border-beam";
+import { DefaultSession } from "next-auth";
+import { Loader } from "../loader";
+import { UpdateUser } from "@/actions/updateUser";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
-export default function ProfilePage() {
-  const session = useSession();
+type ExtendedUser = DefaultSession["user"] & {
+    role: "ADMIN" | "USER" | unknown,
+    age?: number,
+    image?: string,
+    firstname: string,
+    lastname: string
+}
 
+export default function ProfilePage({ user }:{ user: ExtendedUser | undefined }) {
   const [previewUrl, setPreviewUrl] = useState("");
+  const [profile, setProfile] = useState(user)
+  const [isPending, startTransition] = useTransition()
+  const session = useSession()
+
+  useEffect(() => {
+    setProfile(user)
+  }, [user])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    setPreviewUrl(e.currentTarget.value)
   };
 
-  const handleImagePreview = () => {};
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Aquí iría la lógica para guardar los datos en un backend
-    alert("Perfil actualizado correctamente");
+    const form = e.currentTarget;
+    startTransition(() => {
+        UpdateUser({
+            firstname: (form.elements.namedItem('nombre') as HTMLInputElement).value,
+            lastname: (form.elements.namedItem('apellido') as HTMLInputElement).value,
+            age: parseInt((form.elements.namedItem('edad') as HTMLInputElement).value),
+            image: previewUrl
+        })
+            .then((res) => {
+                if(res.error){
+                    toast.error(res.error)
+                }
+                if(res.success){
+                    toast.success("Updated user successfully.")
+                    session.update({
+                        user: {
+                            ...user,
+                            ...res.success
+                        }
+                    })
+                    setProfile({
+                        ...res.success as ExtendedUser
+                    })
+                }
+            })
+    })
   };
 
   return (
     <div className="w-full max-w-6xl mx-auto">
+        {isPending && <Loader />}
       <h1 className="text-3xl font-bold text-center mb-6">Mi Perfil</h1>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_2fr]">
@@ -55,7 +95,7 @@ export default function ProfilePage() {
           <CardContent className="flex flex-col items-center gap-4">
             <Avatar className="w-32 h-32">
               <AvatarImage
-                src={previewUrl || session.data?.user.image}
+                src={previewUrl || profile?.image}
                 alt="Imagen de perfil"
               />
               <AvatarFallback className="text-4xl">
@@ -70,22 +110,13 @@ export default function ProfilePage() {
                   id="imageUrl"
                   name="imageUrl"
                   placeholder="https://ejemplo.com/imagen.jpg"
-                  defaultValue={session.data?.user.image}
+                  defaultValue={profile?.image}
                   onChange={handleChange}
                   className="placeholder:text-[#636363]"
                 />
-                <Button
-                  type="button"
-                  variant="default"
-                  onClick={handleImagePreview}
-                  className="max-w-max border hover:bg-[#444444] cursor-pointer"
-                >
-                  <Search />
-                  Vista previa
-                </Button>
               </div>
               <p className="text-xs text-muted-foreground">
-                Ingresa la URL de tu imagen de perfil
+                Ingresa la URL de tu imagen de perfil, se mostrara el preview automaticamente
               </p>
             </div>
           </CardContent>
@@ -109,8 +140,7 @@ export default function ProfilePage() {
                   id="nombre"
                   name="nombre"
                   placeholder="Tu nombre"
-                  defaultValue={session.data?.user?.name?.split(" ")[0] as string}
-                  onChange={handleChange}
+                  defaultValue={profile?.firstname}
                 />
               </div>
 
@@ -120,8 +150,7 @@ export default function ProfilePage() {
                   id="apellido"
                   name="apellido"
                   placeholder="Tu apellido"
-                  defaultValue={session.data?.user?.name?.split(" ")[1] as string}
-                  onChange={handleChange}
+                  defaultValue={profile?.lastname}
                 />
               </div>
 
@@ -132,8 +161,7 @@ export default function ProfilePage() {
                   name="edad"
                   type="number"
                   placeholder="Tu edad"
-                  defaultValue={session.data?.user?.age}
-                  onChange={handleChange}
+                  defaultValue={profile?.age}
                 />
               </div>
 

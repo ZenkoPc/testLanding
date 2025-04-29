@@ -36,10 +36,10 @@ const Page: FC<PageProps> = async ({}) => {
           Bienvenido a la seccion de tu perfil.
         </h1>
         <p className="text-xl">
-          Que bueno es verte por aca, {session?.user.name}
+          Que bueno es verte por aca.
         </p>
       </header>
-      <ProfilePage />
+      <ProfilePage user={session?.user} />
     </main>
   );
 };
