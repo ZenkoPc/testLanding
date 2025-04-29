@@ -43,8 +43,8 @@ const Sidebar: FC<SidebarProps> = ({ isAdmin }: { isAdmin: boolean }) => {
 
   useEffect(() => {
     setLinks([
-      { label: "Inicio", href: "/dashboard/users", icon: <House /> },
-      { label: "Servicios", href: "/dashboard/services", icon: <CreditCard /> },
+      { label: "Inicio", href: isAdmin ? "/dashboard/admin" : "/dashboard/users", icon: <House /> },
+      { label: "Servicios", href: isAdmin ? "/dashboard/admin/services" : "/dashboard/services", icon: <CreditCard /> },
       ...(isAdmin
         ? [
             {
