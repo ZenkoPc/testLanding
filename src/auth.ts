@@ -5,7 +5,9 @@ import { db } from "./lib/models/db"
 import { getUserById } from "./user/user"
 
 type ExtendedUser = DefaultSession["user"] & {
-    role: "ADMIN" | "USER" | unknown
+    role: "ADMIN" | "USER" | unknown,
+    age?: number,
+    image?: string
 }
 
 declare module "next-auth"{
@@ -44,9 +46,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 session.user.role = token.role
             }
 
-            if(token.name && session.user){
-                session.user.name = token.name
+            if(token.age && session.user){
+                session.user.age = token.age as number
             }
+
+            if(token.image && session.user){
+                session.user.image = token.image as string
+            }
+
 
             return session
         },
@@ -59,7 +66,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             token.role = existingUser.role
             token.name = existingUser.firstName + " " + existingUser.lastName
-
+            token.age = existingUser.age ? existingUser.age : 18
+            token.image = existingUser.image as string
+            
             return token
         }
     },

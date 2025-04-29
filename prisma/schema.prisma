@@ -25,6 +25,7 @@ model User {
   email String @unique
   age Int?
   role Roles
+  image String?
   password String
   createdAt DateTime @default(now())
 }
