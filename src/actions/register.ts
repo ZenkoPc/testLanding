@@ -53,7 +53,7 @@ export async function RegisterCredentials(values: z.infer<typeof registerSchema>
             email,
             password,
             redirect: false,
-            redirectTo: "/dashboard"
+            redirectTo: "/dashboard/users"
         })
         return {
             success: "Cuenta creada correctamente, iniciando sesion...",

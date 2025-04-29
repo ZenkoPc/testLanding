@@ -100,7 +100,7 @@ export const HOME_LINKS = [
     icon: MonitorCogIcon
   },
   {
-    url: '/dashboard',
+    url: '/login',
     slug: "Dashboard",
     icon: SquareKanbanIcon
   },
