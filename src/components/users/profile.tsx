@@ -31,7 +31,7 @@ type ExtendedUser = DefaultSession["user"] & {
 }
 
 export default function ProfilePage({ user }:{ user: ExtendedUser | undefined }) {
-  const [previewUrl, setPreviewUrl] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(user?.image);
   const [profile, setProfile] = useState(user)
   const [isPending, startTransition] = useTransition()
   const session = useSession()
